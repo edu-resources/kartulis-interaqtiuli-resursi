@@ -16,15 +16,15 @@
     <header class="app-header" role="banner">
       <div class="brand-wrapper" id="btn-brand-home" tabindex="0" role="button" aria-label="მთავარ გვერდზე გადასვლა">
         <span class="brand-icon" aria-hidden="true">☀️</span>
-        <h1 class="brand-title">დილა არის მშვენიერი</h1>
+        <h1 class="brand-title">დილა არის მშვენიერი &bull; ქართული ენა</h1>
       </div>
       
       <div class="header-controls">
         <button id="btn-header-home" class="btn btn-icon-control" style="display: none;" aria-label="საწყის გვერდზე დაბრუნება">
           🏠 მთავარი
         </button>
-        <button id="btn-header-quiz" class="btn btn-icon-control" style="display: none;" aria-label="თამაშის დაწყება">
-          🎮 ვითამაშოთ
+        <button id="btn-header-share" class="btn btn-share" aria-label="ამ გვერდის ბმულის გაზიარება">
+          🔗 გაზიარება
         </button>
         <button id="btn-mute-toggle" class="btn btn-icon-control" aria-label="ხმის ჩართვა ან გამორთვა" aria-pressed="false">
           🔊 <span>ხმა: ჩართულია</span>
@@ -35,34 +35,95 @@
     <!-- მთავარი ეკრანების კონტეინერი -->
     <main class="screen-container" role="main">
 
-      <!-- 1. საწყისი ეკრანი (Start View) -->
+      <!-- 1. საწყისი ეკრანი (Start View) - 5 დიდი ინტერაქტიული მოდული -->
       <section id="view-start" class="screen-view active" aria-labelledby="start-title-id">
-        <div class="start-card">
-          <div class="start-badge">🌿 პირველი კლასის საგანმანათლებლო რესურსი</div>
+        <div class="start-card" style="max-width: 1100px;">
+          <div class="start-badge">🌿 პირველი კლასის ინტერაქტიული რესურსი (წერა-კითხვის გარეშე)</div>
           <h2 id="start-title-id" class="start-title">დილა არის მშვენიერი</h2>
-          <p class="start-subtitle">აღმოაჩინე ბუნება</p>
+          <p class="start-subtitle">მოუსმინე, შეეხე და აღმოაჩინე!</p>
           
-          <div class="start-instructions" role="note">
-            👀 დააკვირდი სურათს და დააჭირე იმას, რისი გაცნობაც გსურს.
+          <div class="start-instructions" role="note" style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <span>👀 აირჩიე სურათი, რომლის გაცნობაც გსურს:</span>
+            <button id="btn-start-welcome-speak" class="btn btn-amber" style="padding: 6px 16px; font-size: 1.05rem;" aria-label="ინსტრუქციის მოსმენა">
+              🔊 მოსმენა
+            </button>
           </div>
 
-          <div class="start-actions">
-            <button id="btn-start-explore" class="btn btn-primary" aria-label="ბუნების შესწავლის დაწყება">
-              🌿 დაწყება
-            </button>
-            <button id="btn-start-quiz" class="btn btn-amber" aria-label="თამაშის დაწყება">
-              ⭐ ვითამაშოთ
-            </button>
+          <!-- 5 დიდი ინტერაქტიული ბარათი -->
+          <div class="modules-grid">
+            
+            <!-- 1. ბუნების სამყარო -->
+            <div class="module-card" id="card-mod-nature" tabindex="0" role="button" aria-label="დილა არის მშვენიერი - ბუნების შესწავლა">
+              <span class="module-badge">🌳 თავი 1</span>
+              <div class="module-icon-wrapper">☀️</div>
+              <h3 class="module-card-title">დილა არის მშვენიერი</h3>
+              <p class="module-card-desc">მუხა, წერო, ბუ, კუ, ტბა და სკა</p>
+              <button class="btn btn-primary module-btn-play" tabindex="-1">
+                ▶ დათვალიერება
+              </button>
+            </div>
+
+            <!-- 2. მოთხრობა: აი ია -->
+            <div class="module-card" id="card-mod-ai-ia" tabindex="0" role="button" aria-label="მოთხრობა აი ია">
+              <span class="module-badge">🌸 პირველი გაკვეთილი</span>
+              <div class="module-icon-wrapper">🌸</div>
+              <h3 class="module-card-title">აი ია</h3>
+              <p class="module-card-desc">ანიმაციური მოთხრობა და ყვავილობა</p>
+              <button class="btn btn-violet module-btn-play" tabindex="-1">
+                ▶ მოთხრობა
+              </button>
+            </div>
+
+            <!-- 3. მოთხრობა: ბელები ქალაქში -->
+            <div class="module-card" id="card-mod-belebi" tabindex="0" role="button" aria-label="მოთხრობა ბელები ქალაქში">
+              <span class="module-badge">🐻 მოთხრობა</span>
+              <div class="module-icon-wrapper">🐻</div>
+              <h3 class="module-card-title">ბელები ქალაქში</h3>
+              <p class="module-card-desc">ბრანი და გვინი, დუდუ და მუმუ</p>
+              <button class="btn btn-amber module-btn-play" tabindex="-1">
+                ▶ მოთხრობა
+              </button>
+            </div>
+
+            <!-- 4. ცხოველთა ხმები -->
+            <div class="module-card" id="card-mod-animals" tabindex="0" role="button" aria-label="ცხოველებისა და ფრინველების ხმები">
+              <span class="module-badge">🐾 ხმოვანი ატლასი</span>
+              <div class="module-icon-wrapper">🦉</div>
+              <h3 class="module-card-title">ცხოველთა ხმები</h3>
+              <p class="module-card-desc">ვინ როგორ ხმიანობს? მოუსმინე!</p>
+              <button class="btn btn-secondary module-btn-play" tabindex="-1">
+                ▶ ხმების მოსმენა
+              </button>
+            </div>
+
+            <!-- 5. ვითამაშოთ -->
+            <div class="module-card" id="card-mod-quiz" tabindex="0" role="button" aria-label="ხმოვანი თამაში">
+              <span class="module-badge">🎮 თამაშები</span>
+              <div class="module-icon-wrapper">⭐</div>
+              <h3 class="module-card-title">ვითამაშოთ!</h3>
+              <p class="module-card-desc">გამოიცანი ცხოველის ხმა და ბუნება</p>
+              <button class="btn btn-amber module-btn-play" tabindex="-1">
+                ▶ თამაში
+              </button>
+            </div>
+
           </div>
+
         </div>
       </section>
 
       <!-- 2. ბუნების ინტერაქტიული სცენა (Explore View) -->
       <section id="view-explore" class="screen-view" aria-label="ბუნების ინტერაქტიული სცენა">
         <div class="explore-toolbar">
+          <button id="btn-explore-home" class="btn btn-light" aria-label="მთავარ გვერდზე დაბრუნება">
+            🏠 მთავარი
+          </button>
           <div class="explore-hint">
             <span>🔍</span> დააკვირდი და შეეხე სურათზე ნებისმიერ ობიექტს!
           </div>
+          <button id="btn-explore-share" class="btn btn-share" aria-label="ბუნების სცენის გაზიარება">
+            🔗 გაზიარება
+          </button>
         </div>
 
         <div class="svg-viewport-wrapper">
@@ -496,23 +557,115 @@
         </div>
       </section>
 
-      <!-- 3. დავალების რეჟიმი / ვიქტორინა (Quiz View - „ვითამაშოთ“) -->
+      <!-- 3. ანიმაციური მოთხრობის ეკრანი (Story View) -->
+      <section id="view-story" class="screen-view" aria-label="ანიმაციური მოთხრობა">
+        <div class="story-container">
+          
+          <div class="story-header-bar">
+            <button id="btn-story-home" class="btn btn-light" aria-label="საწყის ეკრანზე დაბრუნება">
+              🏠 მთავარი
+            </button>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span id="story-badge" class="module-badge">🌸 მოთხრობა</span>
+              <span id="story-step-num" class="story-step-indicator">1 / 4</span>
+            </div>
+            <button id="btn-story-share" class="btn btn-share" aria-label="ამ მოთხრობის ბმულის გაზიარება">
+              🔗 გაზიარება
+            </button>
+          </div>
+
+          <div class="story-stage-card">
+            <!-- ანიმაციური SVG სცენა -->
+            <div id="story-stage-content" style="width: 100%;">
+              <!-- დინამიურად იტვირთება SVG სცენა -->
+            </div>
+
+            <!-- გახმოვანებული ტექსტი და ხმის ღილაკი -->
+            <div class="story-speech-box">
+              <p id="story-speech-text" class="story-speech-text">
+                მოთხრობა იტვირთება...
+              </p>
+              <button id="btn-story-speak" class="btn btn-amber" style="font-size: 1.25rem; padding: 10px 24px;" aria-label="ხმამაღლა მოსმენა">
+                🔊 ხელახლა მოსმენა
+              </button>
+            </div>
+          </div>
+
+          <!-- ნაბიჯ-ნაბიჯ მართვის ღილაკები -->
+          <div class="story-nav-bar">
+            <button id="btn-story-prev" class="btn btn-light" aria-label="წინა სცენა">
+              ⬅️ წინა
+            </button>
+            <button id="btn-story-next" class="btn btn-primary" style="font-size: 1.3rem; padding: 12px 32px;" aria-label="შემდეგი სცენა">
+              ➜ შემდეგი
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 4. ცხოველთა და ფრინველთა ხმოვანი გალერეა (Animals Gallery View) -->
+      <section id="view-animals" class="screen-view" aria-label="ცხოველთა ხმოვანი გალერეა">
+        <div class="animals-gallery-container">
+          
+          <div class="story-header-bar">
+            <button id="btn-animals-home" class="btn btn-light" aria-label="საწყის ეკრანზე დაბრუნება">
+              🏠 მთავარი
+            </button>
+            <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 900; color: var(--color-dark-green);">
+              🐾 ცხოველებისა და ფრინველების ხმები
+            </h2>
+            <button id="btn-animals-share" class="btn btn-share" aria-label="გალერეის ბმულის გაზიარება">
+              🔗 გაზიარება
+            </button>
+          </div>
+
+          <div class="explore-hint" style="max-width: 700px;">
+            <span>🎧</span> შეეხე ნებისმიერ ცხოველს, რომ მოუსმინო მის ხმას და სახელს!
+          </div>
+
+          <!-- 10 ცხოველის ბარათების ბადე -->
+          <div class="animals-grid" id="animals-grid">
+            <!-- JS-ით გენერირდება 10 ცხოველის ბარათი -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. დავალების რეჟიმი / ვიქტორინა (Quiz View - „ვითამაშოთ“) -->
       <section id="view-quiz" class="screen-view" aria-label="დავალების რეჟიმი">
         <div class="quiz-container">
           
           <div class="quiz-header-bar">
             <button id="btn-quiz-home" class="btn btn-light" aria-label="საწყის ეკრანზე დაბრუნება">
-              ↩️ დაბრუნება
+              🏠 მთავარი
             </button>
+            
+            <div style="display: flex; gap: 8px;">
+              <button id="btn-quiz-mode-sounds" class="btn btn-amber" style="padding: 6px 14px; font-size: 1rem;" aria-label="ხმების თამაში">
+                🐾 ხმები
+              </button>
+              <button id="btn-quiz-mode-nature" class="btn btn-light" style="padding: 6px 14px; font-size: 1rem;" aria-label="ბუნების თამაში">
+                🌳 ბუნება
+              </button>
+            </div>
+
             <div class="quiz-progress-dots" id="quiz-progress" aria-label="კითხვების პროგრესი">
               <!-- JS-ით გენერირდება 8 წერტილი -->
             </div>
+
+            <button id="btn-quiz-share" class="btn btn-share" aria-label="თამაშის ბმულის გაზიარება">
+              🔗 გაზიარება
+            </button>
           </div>
 
           <div class="quiz-question-box">
             <h2 id="quiz-question-text" class="quiz-question-text">
               კითხვა იტვირთება...
             </h2>
+            <button id="btn-quiz-speak" class="btn btn-amber" style="margin-top: 14px; font-size: 1.3rem; padding: 12px 28px; border-radius: var(--radius-full);" aria-label="შეკითხვის ხელახლა მოსმენა">
+              🔊 შეკითხვის მოსმენა
+            </button>
           </div>
 
           <div class="quiz-options-grid" id="quiz-options-grid" role="group" aria-label="საპასუხო ვარიანტები">
@@ -544,10 +697,10 @@
 
           <div class="celebration-actions">
             <button id="btn-celebration-restart-quiz" class="btn btn-amber" aria-label="თამაშის თავიდან დაწყება">
-              🔄 თავიდან თამაში
+              ⟳ თავიდან თამაში
             </button>
             <button id="btn-celebration-go-explore" class="btn btn-primary" aria-label="ბუნების სცენაში დაბრუნება">
-              🌿 ბუნების დათვალიერება
+              ▶ ბუნების დათვალიერება
             </button>
           </div>
         </div>
@@ -555,49 +708,53 @@
 
     </main>
 
-    <!-- ობიექტის გაცნობის დეტალური მოდალი (Detail Modal) -->
+    <!-- ობიექტის გაცნობის მოდალი (სწავლის რეჟიმი ბავშვებისთვის) -->
     <div id="modal-object-detail" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
       <div class="modal-card">
         
-        <!-- ზედა რიგი: ილუსტრაცია და სახელი მარცვლებით -->
-        <div class="modal-header-row">
-          <div id="modal-icon-container" class="modal-object-icon" aria-hidden="true">
-            <!-- SVG thumbnail -->
-          </div>
-          <div class="modal-title-group">
-            <h2 id="modal-title" class="modal-object-name">ობიექტი</h2>
-            <div id="modal-syllables-container" class="syllables-box" aria-label="დამარცვლა">
-              <!-- მარცვლები -->
-            </div>
-          </div>
+        <!-- დიდი ილუსტრაცია -->
+        <div id="modal-big-visual" class="modal-big-visual" aria-hidden="true">
+          <!-- SVG thumbnail ჩაიტვირთება აქ -->
         </div>
 
-        <!-- მოკლე წინადადება -->
-        <div class="sentence-card">
-          <div id="modal-sentence-text" class="sentence-text">
-            ეს არის წინადადება.
+        <!-- ობიექტის დასახელება და მარცვლები -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+          <h2 id="modal-title" class="modal-object-name">ობიექტი</h2>
+          <div id="modal-syllables-container" class="syllables-box" aria-label="დამარცვლა">
+            <!-- მარცვლები -->
           </div>
-          <button id="btn-modal-speak" class="btn btn-light" style="padding: 8px 16px; font-size: 1rem;" aria-label="წინადადების მოსმენა">
-            🔊 მოუსმინე
-          </button>
+          <!-- მოკლე წინადადება (მასწავლებლისთვის/ვიზუალურად) -->
+          <p id="modal-sentence-text" style="color: #64748b; font-size: 1.15rem; font-weight: 600; margin-top: 2px;"></p>
         </div>
 
-        <!-- შეკითხვები და პასუხები -->
-        <div id="modal-qa-container" class="modal-qa-container" style="display: flex; flex-direction: column; gap: 10px;">
-          <!-- JS-ით ჩაიტვირთება ობიექტის შეკითხვა(ები) და პასუხი(ები) -->
-        </div>
+        <!-- დიდი ხმის ღილაკი მოსასმენად -->
+        <button id="btn-modal-speak" class="btn-audio-huge" aria-label="ხმამაღლა მოსმენა">
+          🔊 <span>მოსმენა</span>
+        </button>
 
         <!-- მოდალის მართვის ღილაკები -->
-        <div class="modal-actions">
-          <button id="btn-modal-replay" class="btn btn-amber" aria-label="ანიმაციის და ხმის კიდევ ერთხელ მოსმენა">
-            🔄 კიდევ ერთხელ
+        <div class="modal-actions" style="width: 100%; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px;">
+          <button id="btn-modal-replay" class="btn btn-amber" aria-label="კიდევ ერთხელ მოსმენა">
+            ⟳ კიდევ ერთხელ
           </button>
-          <button id="btn-modal-close" class="btn btn-primary" aria-label="ბუნების სცენაში დაბრუნება">
-            🌿 დაბრუნება
+          <button id="btn-modal-share" class="btn btn-share" aria-label="ამ ობიექტის ბმულის გაზიარება">
+            🔗 გაზიარება
+          </button>
+          <button id="btn-modal-next" class="btn btn-secondary" aria-label="შემდეგ ობიექტზე გადასვლა">
+            ➜ შემდეგი
+          </button>
+          <button id="btn-modal-close" class="btn btn-light" aria-label="ბუნების სცენაში დაბრუნება">
+            ↩ დაბრუნება
           </button>
         </div>
 
       </div>
+    </div>
+
+    <!-- მცურავი შეტყობინება (Share Toast) ბმულის დაკოპირებისას -->
+    <div id="share-toast" role="status" aria-live="polite">
+      <span>🔗</span>
+      <span id="share-toast-msg">ბმული დაკოპირდა!</span>
     </div>
 
   </div>

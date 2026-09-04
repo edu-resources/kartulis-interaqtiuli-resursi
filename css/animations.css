@@ -389,3 +389,122 @@
 .anim-gentle-nudge {
   animation: gentleNudge 0.5s ease-in-out;
 }
+
+/* გახმოვანებისას ობიექტის ნაზი ნათება/პულსაცია */
+@keyframes speakingGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.7)) drop-shadow(0 0 16px rgba(14, 165, 233, 0.4));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.95)) drop-shadow(0 0 28px rgba(14, 165, 233, 0.65));
+    transform: scale(1.03);
+  }
+}
+
+.speaking-pulse {
+  animation: speakingGlow 1.6s ease-in-out infinite !important;
+}
+
+/* ბუნების სცენაზე ობიექტების რიგრიგობითი გამოკვეთა ბავშვის დასახმარებლად */
+@keyframes guideGlowAnim {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.5));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(250, 204, 21, 0.95)) drop-shadow(0 0 30px rgba(34, 197, 94, 0.8));
+    transform: scale(1.06);
+  }
+}
+
+.guide-highlight {
+  animation: guideGlowAnim 2.2s ease-in-out infinite !important;
+}
+
+/* სწორი პასუხისას მწვანე ნათების რკალი */
+@keyframes correctGreenGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.6), 0 8px 0 #15803d;
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(34, 197, 94, 0.95), 0 8px 0 #15803d;
+  }
+}
+
+.correct-glow-active {
+  animation: correctGreenGlow 1s ease-in-out infinite;
+}
+
+/* --- მოთხრობების ანიმაციები --- */
+
+/* ყვავილის გაშლა */
+@keyframes flowerBloom {
+  0% { transform: scale(0.65) translateY(15px); opacity: 0.8; }
+  50% { transform: scale(1.08) translateY(-4px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.anim-flower-bloom {
+  animation: flowerBloom 2.5s ease-out infinite alternate;
+  transform-origin: bottom center;
+}
+
+/* პეპლის ფრენა */
+@keyframes butterflyFlutter {
+  0% { transform: translate(0, 0) rotate(-6deg); }
+  25% { transform: translate(15px, -18px) rotate(8deg); }
+  50% { transform: translate(25px, -5px) rotate(-12deg); }
+  75% { transform: translate(10px, 12px) rotate(6deg); }
+  100% { transform: translate(0, 0) rotate(-6deg); }
+}
+
+.anim-butterfly-flutter {
+  animation: butterflyFlutter 3.6s ease-in-out infinite;
+}
+
+/* ბავშვის მითითების ჟესტი */
+@keyframes childPoint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.anim-child-point {
+  animation: childPoint 2s ease-in-out infinite;
+}
+
+/* ბელების სიარული */
+@keyframes cubsWalk {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(8px) rotate(2deg); }
+  50% { transform: translateX(18px) rotate(0deg); }
+  75% { transform: translateX(10px) rotate(-2deg); }
+}
+
+.anim-cubs-walk {
+  animation: cubsWalk 2.8s ease-in-out infinite;
+}
+
+/* ლინკის გაზიარების შეტყობინების ამოხტომა (Toast) */
+@keyframes toastSlideUp {
+  0% { transform: translate(-50%, 60px) scale(0.85); opacity: 0; }
+  60% { transform: translate(-50%, -8px) scale(1.04); opacity: 1; }
+  100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+}
+
+.toast-slide-up {
+  animation: toastSlideUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* ცხოველის ბარათზე შეხებისას მხიარული ამოხტომა */
+@keyframes cardBouncePop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.12) translateY(-8px); }
+  70% { transform: scale(0.96) translateY(2px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+.anim-card-pop {
+  animation: cardBouncePop 0.5s ease-out;
+}
+
