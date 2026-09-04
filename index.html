@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>დილა არის მშვენიერი - აღმოაჩინე ბუნება</title>
+  
+  <!-- სტილების ფაილები (ლოკალური, ოფლაინ) -->
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app-root">
+    
+    <!-- ზედა მართვის ზოლი (Header) -->
+    <header class="app-header" role="banner">
+      <div class="brand-wrapper" id="btn-brand-home" tabindex="0" role="button" aria-label="მთავარ გვერდზე გადასვლა">
+        <span class="brand-icon" aria-hidden="true">☀️</span>
+        <h1 class="brand-title">დილა არის მშვენიერი</h1>
+      </div>
+      
+      <div class="header-controls">
+        <button id="btn-header-home" class="btn btn-icon-control" style="display: none;" aria-label="საწყის გვერდზე დაბრუნება">
+          🏠 მთავარი
+        </button>
+        <button id="btn-header-quiz" class="btn btn-icon-control" style="display: none;" aria-label="თამაშის დაწყება">
+          🎮 ვითამაშოთ
+        </button>
+        <button id="btn-mute-toggle" class="btn btn-icon-control" aria-label="ხმის ჩართვა ან გამორთვა" aria-pressed="false">
+          🔊 <span>ხმა: ჩართულია</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- მთავარი ეკრანების კონტეინერი -->
+    <main class="screen-container" role="main">
+
+      <!-- 1. საწყისი ეკრანი (Start View) -->
+      <section id="view-start" class="screen-view active" aria-labelledby="start-title-id">
+        <div class="start-card">
+          <div class="start-badge">🌿 პირველი კლასის საგანმანათლებლო რესურსი</div>
+          <h2 id="start-title-id" class="start-title">დილა არის მშვენიერი</h2>
+          <p class="start-subtitle">აღმოაჩინე ბუნება</p>
+          
+          <div class="start-instructions" role="note">
+            👀 დააკვირდი სურათს და დააჭირე იმას, რისი გაცნობაც გსურს.
+          </div>
+
+          <div class="start-actions">
+            <button id="btn-start-explore" class="btn btn-primary" aria-label="ბუნების შესწავლის დაწყება">
+              🌿 დაწყება
+            </button>
+            <button id="btn-start-quiz" class="btn btn-amber" aria-label="თამაშის დაწყება">
+              ⭐ ვითამაშოთ
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ბუნების ინტერაქტიული სცენა (Explore View) -->
+      <section id="view-explore" class="screen-view" aria-label="ბუნების ინტერაქტიული სცენა">
+        <div class="explore-toolbar">
+          <div class="explore-hint">
+            <span>🔍</span> დააკვირდი და შეეხე სურათზე ნებისმიერ ობიექტს!
+          </div>
+        </div>
+
+        <div class="svg-viewport-wrapper">
+          <!-- სრული, ფერადი ბუნების SVG სცენა (1200 x 700) -->
+          <svg class="nature-svg" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ბუნების სცენა: მზე, ცა, მუხა, ტბა და ცხოველები">
+            <defs>
+              <!-- ცის გრადიენტი -->
+              <linearGradient id="grad-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="55%" stop-color="#bae6fd"/>
+                <stop offset="100%" stop-color="#fef9c3"/>
+              </linearGradient>
+
+              <!-- ბორცვების გრადიენტი -->
+              <linearGradient id="grad-hills-far" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#86efac"/>
+                <stop offset="100%" stop-color="#4ade80"/>
+              </linearGradient>
+              <linearGradient id="grad-meadow" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#4ade80"/>
+                <stop offset="60%" stop-color="#22c55e"/>
+                <stop offset="100%" stop-color="#16a34a"/>
+              </linearGradient>
+
+              <!-- ტბის წყლის გრადიენტი -->
+              <linearGradient id="grad-lake" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="60%" stop-color="#0284c7"/>
+                <stop offset="100%" stop-color="#0369a1"/>
+              </linearGradient>
+
+              <!-- მუხის ხის ტანის გრადიენტი -->
+              <linearGradient id="grad-trunk" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#5d4037"/>
+                <stop offset="40%" stop-color="#795548"/>
+                <stop offset="80%" stop-color="#8d6e63"/>
+                <stop offset="100%" stop-color="#4e342e"/>
+              </linearGradient>
+
+              <!-- მუხის ფოთლების ჩრდილები -->
+              <radialGradient id="grad-canopy-1" cx="40%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#4ade80"/>
+                <stop offset="70%" stop-color="#16a34a"/>
+                <stop offset="100%" stop-color="#14532d"/>
+              </radialGradient>
+              <radialGradient id="grad-canopy-2" cx="30%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#22c55e"/>
+                <stop offset="85%" stop-color="#15803d"/>
+                <stop offset="100%" stop-color="#052e16"/>
+              </radialGradient>
+
+              <!-- სკის გრადიენტი -->
+              <linearGradient id="grad-beehive" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#fef08a"/>
+                <stop offset="50%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#d97706"/>
+              </linearGradient>
+
+              <!-- რკოს გრადიენტი -->
+              <linearGradient id="grad-acorn" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#d97706"/>
+                <stop offset="60%" stop-color="#b45309"/>
+                <stop offset="100%" stop-color="#78350f"/>
+              </linearGradient>
+            </defs>
+
+            <!-- ცის ფონი -->
+            <rect x="0" y="0" width="1200" height="700" fill="url(#grad-sky)"/>
+
+            <!-- დილის მზე -->
+            <g class="anim-sun-group" transform="translate(110, 100)">
+              <!-- მზის სხივები -->
+              <g class="anim-sun-rays">
+                <line x1="0" y1="-65" x2="0" y2="-82" stroke="#fde047" stroke-width="5" stroke-linecap="round"/>
+                <line x1="46" y1="-46" x2="58" y2="-58" stroke="#fde047" stroke-width="5" stroke-linecap="round"/>
+                <line x1="65" y1="0" x2="82" y2="0" stroke="#fde047" stroke-width="5" stroke-linecap="round"/>
+                <line x1="46" y1="46" x2="58" y2="58" stroke="#fde047" stroke-width="5" stroke-linecap="round"/>
+                <line x1="0" y1="65" x2="0" y2="82" stroke="#fde047" stroke-width="5" stroke-linecap="round"/>
+                <line x1="-46" y1="46" x2="-58" y2="58" stroke="#fde047" stroke-width="5" stroke-linecap="round"/>
+                <line x1="-65" y1="0" x2="-82" y2="0" stroke="#fde047" stroke-width="5" stroke-linecap="round"/>
+                <line x1="-46" y1="-46" x2="-58" y2="-58" stroke="#fde047" stroke-width="5" stroke-linecap="round"/>
+              </g>
+              <!-- მზის დისკო -->
+              <circle cx="0" cy="0" r="50" fill="#facc15" stroke="#f59e0b" stroke-width="3"/>
+              <!-- მეგობრული ღიმილი მზეზე -->
+              <ellipse cx="-16" cy="-10" rx="4" ry="6" fill="#78350f"/>
+              <ellipse cx="16" cy="-10" rx="4" ry="6" fill="#78350f"/>
+              <circle cx="-14" cy="-12" r="1.5" fill="#ffffff"/>
+              <circle cx="18" cy="-12" r="1.5" fill="#ffffff"/>
+              <path d="M -18 10 Q 0 26 18 10" stroke="#78350f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <!-- ვარდისფერი ლოყები -->
+              <circle cx="-25" cy="5" r="7" fill="#f87171" opacity="0.45"/>
+              <circle cx="25" cy="5" r="7" fill="#f87171" opacity="0.45"/>
+            </g>
+
+            <!-- მცურავი დილის ღრუბლები -->
+            <g class="anim-cloud-1" opacity="0.95">
+              <path d="M 280 90 Q 300 60 340 70 Q 380 50 420 75 Q 460 65 480 95 Q 490 120 460 130 L 290 130 Q 260 120 280 90 Z" fill="#ffffff"/>
+            </g>
+            <g class="anim-cloud-2" opacity="0.9">
+              <path d="M 680 70 Q 700 45 735 55 Q 765 35 805 60 Q 840 50 860 80 Q 870 105 840 115 L 690 115 Q 660 105 680 70 Z" fill="#ffffff"/>
+            </g>
+
+            <!-- შორეული ბორცვები -->
+            <path d="M 0 380 Q 200 320 450 360 Q 750 310 1050 370 L 1200 390 L 1200 700 L 0 700 Z" fill="url(#grad-hills-far)"/>
+
+            <!-- მთავარი მწვანე მინდორი -->
+            <path d="M 0 440 Q 260 410 520 450 Q 800 400 1200 460 L 1200 700 L 0 700 Z" fill="url(#grad-meadow)"/>
+
+            <!-- პატარა ტბა (ტბა / Pond) -->
+            <g id="scene-lake-group">
+              <!-- ტბის სანაპირო ჩარჩო (სილა/მიწა) -->
+              <path d="M 120 540 C 100 480, 240 450, 360 465 C 470 475, 520 530, 480 600 C 440 660, 260 665, 170 635 C 130 615, 105 575, 120 540 Z" fill="#bbf7d0" opacity="0.7"/>
+              <!-- ტბის წყალი -->
+              <path id="lake-water-body" d="M 135 540 C 115 490, 250 462, 355 475 C 455 485, 495 535, 465 595 C 430 648, 265 652, 185 625 C 145 610, 122 575, 135 540 Z" fill="url(#grad-lake)"/>
+              
+              <!-- ტბის წყლის მსუბუქი ლივლივი -->
+              <path class="anim-water-ripple" d="M 210 520 Q 250 515 290 520" stroke="#e0f2fe" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path class="anim-water-ripple" d="M 320 550 Q 370 545 420 550" stroke="#e0f2fe" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path class="anim-water-ripple" d="M 190 580 Q 240 575 300 580" stroke="#e0f2fe" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+              <!-- დუმფარები (Water lilies) ტბაზე -->
+              <g transform="translate(380, 520)">
+                <ellipse cx="0" cy="0" rx="20" ry="10" fill="#15803d"/>
+                <polygon points="0,0 8,-12 -8,-12" fill="url(#grad-lake)"/>
+                <!-- ყვავილი -->
+                <circle cx="0" cy="-4" r="5" fill="#f472b6"/>
+                <circle cx="0" cy="-4" r="2" fill="#fef08a"/>
+              </g>
+              <g transform="translate(190, 600)">
+                <ellipse cx="0" cy="0" rx="16" ry="8" fill="#15803d"/>
+                <polygon points="0,0 6,-10 -6,-10" fill="url(#grad-lake)"/>
+                <circle cx="0" cy="-3" r="4" fill="#f472b6"/>
+              </g>
+            </g>
+
+            <!-- ==========================================
+                 1. ინტერაქტიული ობიექტი: წერო (Crane)
+                 მდებარეობს ტბის პირას (x: 240-350, y: 380-570)
+                 ========================================== -->
+            <g id="svg-obj-crane" class="interactive-object" data-object-id="crane" tabindex="0" role="button" aria-label="წერო: დააჭირე გასაცნობად">
+              <g class="crane-body-group">
+                <!-- უკანა ფეხი (წყალში ჩადგმული) -->
+                <path d="M 285 490 L 285 575 L 275 578 M 285 575 L 293 578" stroke="#ea580c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                
+                <!-- წინა ფეხი (ანიმირებადი ნაბიჯი) -->
+                <g class="crane-leg-front">
+                  <path d="M 300 490 L 305 575 L 295 578 M 305 575 L 315 578" stroke="#ea580c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                </g>
+
+                <!-- ტანი -->
+                <path d="M 280 440 C 260 445, 250 480, 275 500 C 305 515, 335 485, 330 455 C 325 435, 305 430, 280 440 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+                
+                <!-- კუდის შავი ბუმბული -->
+                <path d="M 255 480 Q 240 500 250 515 Q 275 510 280 495 Z" fill="#334155"/>
+
+                <!-- მარცხენა ფრთა (ანიმირებადი) -->
+                <g class="crane-wing-left">
+                  <path d="M 275 450 Q 295 455, 318 480 Q 295 500, 270 485 Z" fill="#e2e8f0" stroke="#64748b" stroke-width="1.8"/>
+                </g>
+
+                <!-- მარჯვენა ფრთა (ანიმირებადი) -->
+                <g class="crane-wing-right">
+                  <path d="M 285 448 Q 308 452, 325 472 Q 305 490, 280 478 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="1.8"/>
+                </g>
+
+                <!-- გრძელი ელეგანტური კისერი -->
+                <path d="M 315 445 Q 330 410 325 375 Q 320 350 310 340 Q 300 350 308 375 Q 312 410 300 445 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.8"/>
+                
+                <!-- თავი და წითელი ქოჩორი -->
+                <ellipse cx="312" cy="340" rx="9" ry="7" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+                <path d="M 308 334 Q 314 330 318 335" stroke="#ef4444" stroke-width="2.5" fill="none"/>
+                <!-- თვალი -->
+                <circle cx="315" cy="339" r="2" fill="#0f172a"/>
+                <circle cx="316" cy="338" r="0.7" fill="#ffffff"/>
+                <!-- გრძელი ნისკარტი -->
+                <polygon points="318,337 348,342 318,344" fill="#f59e0b" stroke="#d97706" stroke-width="1"/>
+              </g>
+            </g>
+
+            <!-- ==========================================
+                 4. ინტერაქტიული ობიექტი: მუხა (Oak)
+                 დიდი, ძლიერი ხე მარჯვენა მხარეს (x: 700-1150, y: 100-660)
+                 ========================================== -->
+            <g id="svg-obj-oak" class="interactive-object" data-object-id="oak" tabindex="0" role="button" aria-label="მუხა: დააჭირე გასაცნობად">
+              <!-- მუხის ძლიერი ტანი და ფესვები -->
+              <path d="M 880 650 Q 860 550 870 420 Q 820 440 760 380 L 780 340 Q 840 370 885 360 Q 900 290 910 240 L 960 240 Q 950 320 980 360 Q 1040 350 1100 320 L 1115 360 Q 1050 390 980 430 Q 990 550 1020 650 Z" fill="url(#grad-trunk)" stroke="#3e2723" stroke-width="3"/>
+              
+              <!-- ხის ქერქის ტექსტურა -->
+              <path d="M 910 610 Q 905 520 915 450" stroke="#4e342e" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M 945 630 Q 950 540 940 440" stroke="#4e342e" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M 975 620 Q 970 510 978 460" stroke="#4e342e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+              <!-- მუხის დიდი მწვანე ვარჯი (Canopy) - ფენა 1 -->
+              <g class="oak-canopy-layer-1">
+                <circle cx="830" cy="220" r="90" fill="url(#grad-canopy-2)"/>
+                <circle cx="980" cy="210" r="95" fill="url(#grad-canopy-2)"/>
+                <circle cx="900" cy="140" r="100" fill="url(#grad-canopy-1)"/>
+                <circle cx="750" cy="260" r="75" fill="url(#grad-canopy-2)"/>
+                <circle cx="1060" cy="250" r="80" fill="url(#grad-canopy-2)"/>
+              </g>
+
+              <!-- მუხის ვარჯი - ფენა 2 (ნათელი წინა ფოთლები) -->
+              <g class="oak-canopy-layer-2">
+                <circle cx="800" cy="180" r="70" fill="url(#grad-canopy-1)"/>
+                <circle cx="920" cy="120" r="75" fill="#4ade80"/>
+                <circle cx="1010" cy="170" r="70" fill="url(#grad-canopy-1)"/>
+                <circle cx="880" cy="220" r="85" fill="#22c55e"/>
+              </g>
+
+              <!-- ფოთლების ცალკეული დეტალები -->
+              <g class="oak-leaves-detail">
+                <ellipse cx="730" cy="230" rx="18" ry="10" transform="rotate(-20 730 230)" fill="#86efac"/>
+                <ellipse cx="820" cy="130" rx="20" ry="11" transform="rotate(15 820 130)" fill="#86efac"/>
+                <ellipse cx="960" cy="100" rx="22" ry="12" transform="rotate(-10 960 100)" fill="#86efac"/>
+                <ellipse cx="1060" cy="210" rx="19" ry="10" transform="rotate(25 1060 210)" fill="#86efac"/>
+              </g>
+            </g>
+
+            <!-- ==========================================
+                 6. ინტერაქტიული ობიექტი: ტოტი (Branch)
+                 მუხის დიდი ტოტი, რომელიც მარცხნივ გამოდის (x: 660-910, y: 280-360)
+                 ========================================== -->
+            <g id="svg-obj-branch" class="interactive-object" data-object-id="branch" tabindex="0" role="button" aria-label="ტოტი: დააჭირე გასაცნობად">
+              <g class="branch-main-group">
+                <!-- მთავარი ტოტის ხაზი -->
+                <path d="M 910 330 Q 820 315 750 310 Q 690 315 630 340 L 635 355 Q 700 330 760 325 Q 830 330 910 350 Z" fill="#6d4c41" stroke="#4e342e" stroke-width="2.5"/>
+                <!-- მეორე პატარა ტოტი რკოსა და ბუსთვის -->
+                <path d="M 780 320 Q 750 290 710 285 L 712 295 Q 750 300 775 325 Z" fill="#6d4c41" stroke="#4e342e" stroke-width="2"/>
+                
+                <!-- მუხის მწვანე ფოთლები ტოტზე -->
+                <g>
+                  <ellipse cx="640" cy="335" rx="14" ry="7" transform="rotate(-30 640 335)" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+                  <ellipse cx="665" cy="320" rx="16" ry="8" transform="rotate(25 665 320)" fill="#4ade80" stroke="#15803d" stroke-width="1.5"/>
+                  <ellipse cx="730" cy="305" rx="15" ry="8" transform="rotate(-15 730 305)" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+                  <ellipse cx="800" cy="315" rx="16" ry="8" transform="rotate(20 800 315)" fill="#4ade80" stroke="#15803d" stroke-width="1.5"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- ==========================================
+                 2. ინტერაქტიული ობიექტი: ბუ (Owl)
+                 ზის მუხის ტოტზე (x: 820-910, y: 220-330)
+                 ========================================== -->
+            <g id="svg-obj-owl" class="interactive-object" data-object-id="owl" tabindex="0" role="button" aria-label="ბუ: დააჭირე გასაცნობად" transform="translate(825, 205)">
+              <!-- ბუს ტანი -->
+              <ellipse cx="40" cy="65" rx="26" ry="32" fill="#8d6e63" stroke="#5d4037" stroke-width="2.5"/>
+              <ellipse cx="40" cy="72" rx="18" ry="20" fill="#d7ccc8"/>
+              
+              <!-- ბუს ფრთები (ანიმირებადი) -->
+              <g class="owl-wing">
+                <path d="M 16 55 Q 8 75 22 88 Z" fill="#6d4c41" stroke="#4e342e" stroke-width="2"/>
+                <path d="M 64 55 Q 72 75 58 88 Z" fill="#6d4c41" stroke="#4e342e" stroke-width="2"/>
+              </g>
+
+              <!-- ბუს თავი (ანიმირებადი) -->
+              <g class="owl-head">
+                <!-- ყურის ქოჩორები -->
+                <polygon points="18,32 26,14 36,28" fill="#6d4c41" stroke="#4e342e" stroke-width="1.5"/>
+                <polygon points="44,28 54,14 62,32" fill="#6d4c41" stroke="#4e342e" stroke-width="1.5"/>
+                
+                <!-- თავის ოვალი -->
+                <circle cx="40" cy="38" r="24" fill="#a1887f" stroke="#5d4037" stroke-width="2"/>
+                
+                <!-- დიდი თვალები -->
+                <circle cx="28" cy="38" r="11" fill="#fef08a" stroke="#f59e0b" stroke-width="2"/>
+                <circle cx="52" cy="38" r="11" fill="#fef08a" stroke="#f59e0b" stroke-width="2"/>
+                
+                <!-- გუგები -->
+                <circle cx="28" cy="38" r="5.5" fill="#1e293b"/>
+                <circle cx="52" cy="38" r="5.5" fill="#1e293b"/>
+                <!-- თვალის ბზინვარება -->
+                <circle cx="30" cy="36" r="2" fill="#ffffff"/>
+                <circle cx="54" cy="36" r="2" fill="#ffffff"/>
+
+                <!-- ქუთუთოები (დახამხამების ანიმაცია) -->
+                <path class="owl-eye-lid" d="M 17 38 Q 28 30 39 38 Z" fill="#8d6e63"/>
+                <path class="owl-eye-lid" d="M 41 38 Q 52 30 63 38 Z" fill="#8d6e63"/>
+
+                <!-- ნისკარტი -->
+                <polygon points="36,44 44,44 40,53" fill="#f97316"/>
+              </g>
+
+              <!-- ბუს ბრჭყალები ტოტზე -->
+              <circle cx="32" cy="95" r="3.5" fill="#f97316"/>
+              <circle cx="38" cy="96" r="3.5" fill="#f97316"/>
+              <circle cx="48" cy="96" r="3.5" fill="#f97316"/>
+              <circle cx="54" cy="95" r="3.5" fill="#f97316"/>
+            </g>
+
+            <!-- ==========================================
+                 5. ინტერაქტიული ობიექტი: რკო (Acorn)
+                 კიდია ტოტზე (x: 770, y: 320)
+                 ========================================== -->
+            <g id="svg-obj-acorn" class="interactive-object" data-object-id="acorn" tabindex="0" role="button" aria-label="რკო: დააჭირე გასაცნობად" transform="translate(775, 315)">
+              <!-- ყუნწი -->
+              <path d="M 12 0 Q 14 -12 24 -10" stroke="#5d4037" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <!-- რკოს ქუდი -->
+              <path d="M 0 6 C 0 -4, 24 -4, 24 6 Z" fill="#5d4037" stroke="#3e2723" stroke-width="1.8"/>
+              <circle cx="6" cy="2" r="1.2" fill="#8d6e63"/>
+              <circle cx="12" cy="1" r="1.2" fill="#8d6e63"/>
+              <circle cx="18" cy="2" r="1.2" fill="#8d6e63"/>
+              <!-- რკოს ნაყოფი -->
+              <path d="M 2 6 C 0 24, 10 36, 12 38 C 14 36, 24 24, 22 6 Z" fill="url(#grad-acorn)" stroke="#78350f" stroke-width="1.8"/>
+              <!-- ნათელი ზოლი რკოზე -->
+              <path d="M 6 10 Q 5 22 11 30" stroke="#fbbf24" stroke-width="1.5" fill="none" opacity="0.6"/>
+            </g>
+
+            <!-- ==========================================
+                 8. ინტერაქტიული ობიექტი: სკა (Beehive)
+                 კიდია ხის მარცხენა ტოტზე (x: 660, y: 250)
+                 ========================================== -->
+            <g id="svg-obj-beehive" class="interactive-object" data-object-id="beehive" tabindex="0" role="button" aria-label="სკა: დააჭირე გასაცნობად" transform="translate(680, 240)">
+              <!-- საკიდი ტოტიდან -->
+              <line x1="25" y1="0" x2="25" y2="20" stroke="#795548" stroke-width="3"/>
+              
+              <!-- სკის კორპუსი (ფენები) -->
+              <g class="hive-body">
+                <ellipse cx="25" cy="26" rx="14" ry="6" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+                <ellipse cx="25" cy="36" rx="20" ry="8" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+                <ellipse cx="25" cy="48" rx="23" ry="9" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+                <ellipse cx="25" cy="60" rx="21" ry="8" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+                <ellipse cx="25" cy="70" rx="15" ry="6" fill="#d97706" stroke="#b45309" stroke-width="2"/>
+                <!-- სკის შესასვლელი ხვრელი -->
+                <ellipse cx="25" cy="50" rx="5" ry="6" fill="#451a03"/>
+              </g>
+
+              <!-- ფუტკარი 1 (ანიმირებული ორბიტა) -->
+              <g class="bee-flight-1">
+                <g transform="translate(45, 20)">
+                  <ellipse cx="0" cy="0" rx="5" ry="3.5" fill="#facc15" stroke="#1e293b" stroke-width="1"/>
+                  <line x1="-1" y1="-3" x2="-1" y2="3" stroke="#1e293b" stroke-width="1.2"/>
+                  <line x1="2" y1="-3" x2="2" y2="3" stroke="#1e293b" stroke-width="1.2"/>
+                  <!-- ფრთები -->
+                  <ellipse cx="-1" cy="-4" rx="3.5" ry="2" fill="#e0f2fe" opacity="0.85"/>
+                </g>
+              </g>
+
+              <!-- ფუტკარი 2 (ანიმირებული ორბიტა) -->
+              <g class="bee-flight-2">
+                <g transform="translate(-15, 45)">
+                  <ellipse cx="0" cy="0" rx="5" ry="3.5" fill="#facc15" stroke="#1e293b" stroke-width="1"/>
+                  <line x1="-1" y1="-3" x2="-1" y2="3" stroke="#1e293b" stroke-width="1.2"/>
+                  <line x1="2" y1="-3" x2="2" y2="3" stroke="#1e293b" stroke-width="1.2"/>
+                  <ellipse cx="-1" cy="-4" rx="3.5" ry="2" fill="#e0f2fe" opacity="0.85"/>
+                </g>
+              </g>
+
+              <!-- ფუტკარი 3 (ანიმირებული ორბიტა) -->
+              <g class="bee-flight-3">
+                <g transform="translate(10, 80)">
+                  <ellipse cx="0" cy="0" rx="4.5" ry="3" fill="#facc15" stroke="#1e293b" stroke-width="1"/>
+                  <line x1="0" y1="-2.5" x2="0" y2="2.5" stroke="#1e293b" stroke-width="1"/>
+                  <ellipse cx="0" cy="-3.5" rx="3" ry="1.8" fill="#e0f2fe" opacity="0.85"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- ==========================================
+                 3. ინტერაქტიული ობიექტი: კუ (Turtle)
+                 ბალახზე, ტბის ნაპირთან (x: 460-550, y: 550-630)
+                 ========================================== -->
+            <g id="svg-obj-turtle" class="interactive-object" data-object-id="turtle" tabindex="0" role="button" aria-label="კუ: დააჭირე გასაცნობად" transform="translate(470, 560)">
+              <!-- ფეხები და კუდი (ანიმირებადი) -->
+              <g class="turtle-legs">
+                <ellipse cx="14" cy="26" rx="9" ry="6" fill="#84cc16" stroke="#4d7c0f" stroke-width="1.5"/>
+                <ellipse cx="64" cy="26" rx="9" ry="6" fill="#84cc16" stroke="#4d7c0f" stroke-width="1.5"/>
+                <ellipse cx="20" cy="38" rx="8" ry="5" fill="#65a30d"/>
+                <ellipse cx="58" cy="38" rx="8" ry="5" fill="#65a30d"/>
+                <!-- პატარა კუდი -->
+                <polygon points="68,30 82,33 69,37" fill="#84cc16" stroke="#4d7c0f" stroke-width="1"/>
+              </g>
+
+              <!-- კუს თავი (ანიმირებადი გამოყოფა) -->
+              <g class="turtle-head">
+                <ellipse cx="8" cy="18" rx="11" ry="8" fill="#84cc16" stroke="#4d7c0f" stroke-width="1.8"/>
+                <!-- თვალი -->
+                <circle cx="5" cy="15" r="2.2" fill="#1e293b"/>
+                <circle cx="6" cy="14" r="0.8" fill="#ffffff"/>
+                <!-- პატარა ღიმილი -->
+                <path d="M 2 20 Q 6 23 9 21" stroke="#365314" stroke-width="1.2" fill="none"/>
+              </g>
+
+              <!-- კუს მაგარი ბაკანი -->
+              <g class="turtle-shell">
+                <ellipse cx="38" cy="24" rx="34" ry="24" fill="#3f6212" stroke="#1a2e05" stroke-width="2.8"/>
+                <!-- ბაკნის ფილები (ჰექსაგონალური ნახატი) -->
+                <ellipse cx="38" cy="22" rx="25" ry="16" fill="#4d7c0f"/>
+                <path d="M 22 22 Q 38 10 54 22 Q 38 34 22 22 Z" fill="#65a30d" stroke="#a3e635" stroke-width="1.8"/>
+                <line x1="22" y1="22" x2="10" y2="24" stroke="#a3e635" stroke-width="1.8"/>
+                <line x1="54" y1="22" x2="66" y2="24" stroke="#a3e635" stroke-width="1.8"/>
+                <line x1="38" y1="10" x2="38" y2="0" stroke="#a3e635" stroke-width="1.8"/>
+                <line x1="38" y1="34" x2="38" y2="46" stroke="#a3e635" stroke-width="1.8"/>
+              </g>
+            </g>
+
+            <!-- ==========================================
+                 7. ინტერაქტიული ობიექტი: ია (Violet)
+                 მინდორზე გაზრდილი ნაზი ყვავილი (x: 620-690, y: 560-640)
+                 ========================================== -->
+            <g id="svg-obj-violet" class="interactive-object" data-object-id="violet" tabindex="0" role="button" aria-label="ია: დააჭირე გასაცნობად" transform="translate(635, 560)">
+              <!-- ღერო და გულისებრი ფოთლები -->
+              <path d="M 25 65 Q 25 45 25 35" stroke="#15803d" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <ellipse cx="10" cy="52" rx="14" ry="9" transform="rotate(-30 10 52)" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+              <ellipse cx="40" cy="52" rx="14" ry="9" transform="rotate(30 40 52)" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
+
+              <!-- იისფერი ფურცლები (ანიმირებადი გაშლა) -->
+              <g class="violet-petals">
+                <circle cx="17" cy="20" r="12" fill="#8b5cf6" stroke="#6d28d9" stroke-width="1.5"/>
+                <circle cx="33" cy="20" r="12" fill="#8b5cf6" stroke="#6d28d9" stroke-width="1.5"/>
+                <circle cx="12" cy="33" r="12" fill="#7c3aed" stroke="#5b21b6" stroke-width="1.5"/>
+                <circle cx="38" cy="33" r="12" fill="#7c3aed" stroke="#5b21b6" stroke-width="1.5"/>
+                <circle cx="25" cy="38" r="13" fill="#9333ea" stroke="#6b21a8" stroke-width="1.5"/>
+                
+                <!-- ყვითელი ნათელი გული -->
+                <circle class="violet-center" cx="25" cy="28" r="6.5" fill="#facc15" stroke="#f59e0b" stroke-width="2"/>
+              </g>
+            </g>
+
+            <!-- მინდვრის დამატებითი ყვავილები და დეტალები სილამაზისთვის -->
+            <g opacity="0.85">
+              <circle cx="100" cy="620" r="4" fill="#fef08a"/>
+              <circle cx="100" cy="620" r="1.5" fill="#f97316"/>
+              <circle cx="580" cy="640" r="4" fill="#ffffff"/>
+              <circle cx="580" cy="640" r="1.5" fill="#facc15"/>
+              <circle cx="750" cy="630" r="5" fill="#fef08a"/>
+              <circle cx="750" cy="630" r="2" fill="#f97316"/>
+            </g>
+
+          </svg>
+        </div>
+      </section>
+
+      <!-- 3. დავალების რეჟიმი / ვიქტორინა (Quiz View - „ვითამაშოთ“) -->
+      <section id="view-quiz" class="screen-view" aria-label="დავალების რეჟიმი">
+        <div class="quiz-container">
+          
+          <div class="quiz-header-bar">
+            <button id="btn-quiz-home" class="btn btn-light" aria-label="საწყის ეკრანზე დაბრუნება">
+              ↩️ დაბრუნება
+            </button>
+            <div class="quiz-progress-dots" id="quiz-progress" aria-label="კითხვების პროგრესი">
+              <!-- JS-ით გენერირდება 8 წერტილი -->
+            </div>
+          </div>
+
+          <div class="quiz-question-box">
+            <h2 id="quiz-question-text" class="quiz-question-text">
+              კითხვა იტვირთება...
+            </h2>
+          </div>
+
+          <div class="quiz-options-grid" id="quiz-options-grid" role="group" aria-label="საპასუხო ვარიანტები">
+            <!-- JS-ით გენერირდება 3 დიდი ილუსტრირებული ბარათი -->
+          </div>
+
+          <div id="quiz-feedback" class="quiz-feedback-box" role="status" aria-live="polite">
+            <!-- წარმატების ან წახალისების შეტყობინება -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 4. საზეიმო ფინალური ეკრანი (Celebration View) -->
+      <section id="view-celebration" class="screen-view" aria-label="თამაშის წარმატებით დასრულება">
+        <div class="celebration-card">
+          <div class="celebration-star-badge" aria-hidden="true">🌟</div>
+          <h2 class="celebration-title">
+            შესანიშნავია! შენ ბუნების პატარა მკვლევარი ხარ!
+          </h2>
+          
+          <p style="font-size: 1.25rem; font-weight: 700; color: #166534;">
+            შენ წარმატებით გაიცანი ბუნების რვავე საოცრება:
+          </p>
+
+          <div class="celebration-grid" id="celebration-grid">
+            <!-- JS-ით ჩაიტვირთება 8-ვე ობიექტის ილუსტრაცია და სახელი -->
+          </div>
+
+          <div class="celebration-actions">
+            <button id="btn-celebration-restart-quiz" class="btn btn-amber" aria-label="თამაშის თავიდან დაწყება">
+              🔄 თავიდან თამაში
+            </button>
+            <button id="btn-celebration-go-explore" class="btn btn-primary" aria-label="ბუნების სცენაში დაბრუნება">
+              🌿 ბუნების დათვალიერება
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ობიექტის გაცნობის დეტალური მოდალი (Detail Modal) -->
+    <div id="modal-object-detail" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
+      <div class="modal-card">
+        
+        <!-- ზედა რიგი: ილუსტრაცია და სახელი მარცვლებით -->
+        <div class="modal-header-row">
+          <div id="modal-icon-container" class="modal-object-icon" aria-hidden="true">
+            <!-- SVG thumbnail -->
+          </div>
+          <div class="modal-title-group">
+            <h2 id="modal-title" class="modal-object-name">ობიექტი</h2>
+            <div id="modal-syllables-container" class="syllables-box" aria-label="დამარცვლა">
+              <!-- მარცვლები -->
+            </div>
+          </div>
+        </div>
+
+        <!-- მოკლე წინადადება -->
+        <div class="sentence-card">
+          <div id="modal-sentence-text" class="sentence-text">
+            ეს არის წინადადება.
+          </div>
+          <button id="btn-modal-speak" class="btn btn-light" style="padding: 8px 16px; font-size: 1rem;" aria-label="წინადადების მოსმენა">
+            🔊 მოუსმინე
+          </button>
+        </div>
+
+        <!-- შეკითხვები და პასუხები -->
+        <div id="modal-qa-container" class="modal-qa-container" style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- JS-ით ჩაიტვირთება ობიექტის შეკითხვა(ები) და პასუხი(ები) -->
+        </div>
+
+        <!-- მოდალის მართვის ღილაკები -->
+        <div class="modal-actions">
+          <button id="btn-modal-replay" class="btn btn-amber" aria-label="ანიმაციის და ხმის კიდევ ერთხელ მოსმენა">
+            🔄 კიდევ ერთხელ
+          </button>
+          <button id="btn-modal-close" class="btn btn-primary" aria-label="ბუნების სცენაში დაბრუნება">
+            🌿 დაბრუნება
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- სკრიპტები (ოფლაინ, სუფთა JS) -->
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

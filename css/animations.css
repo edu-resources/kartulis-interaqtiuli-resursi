@@ -1,0 +1,391 @@
+/* ==========================================================================
+   დილა არის მშვენიერი - ბუნებრივი და რბილი ანიმაციები
+   პირველი კლასის მოსწავლეებისთვის
+   ========================================================================== */
+
+/* --- გარემოს ფონური ანიმაციები --- */
+
+/* მზის ნაზი ნათება */
+@keyframes sunPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+.anim-sun-rays {
+  transform-origin: 100px 90px;
+  animation: sunRotate 40s linear infinite;
+}
+
+@keyframes sunRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ღრუბლების ნელი ცურვა */
+@keyframes cloudDrift1 {
+  0% { transform: translateX(-50px); }
+  50% { transform: translateX(30px); }
+  100% { transform: translateX(-50px); }
+}
+
+@keyframes cloudDrift2 {
+  0% { transform: translateX(20px); }
+  50% { transform: translateX(-40px); }
+  100% { transform: translateX(20px); }
+}
+
+.anim-cloud-1 {
+  animation: cloudDrift1 28s ease-in-out infinite;
+}
+
+.anim-cloud-2 {
+  animation: cloudDrift2 35s ease-in-out infinite;
+}
+
+/* ტბის წყლის მსუბუქი ლივლივი */
+@keyframes waterRipple {
+  0%, 100% {
+    transform: scaleX(1) translateY(0);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scaleX(1.03) translateY(1.5px);
+    opacity: 0.9;
+  }
+}
+
+.anim-water-ripple {
+  animation: waterRipple 4s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+/* --- 8 ინტერაქტიული ობიექტის ანიმაციები --- */
+
+/* 1. წერო: ნელა გაშალოს ფრთები და ერთი ნაბიჯი გადადგას */
+.crane-active .crane-wing-left {
+  animation: craneWingLeft 2.2s ease-in-out;
+  transform-origin: 290px 480px;
+}
+
+.crane-active .crane-wing-right {
+  animation: craneWingRight 2.2s ease-in-out;
+  transform-origin: 320px 480px;
+}
+
+.crane-active .crane-leg-front {
+  animation: craneStep 2.2s ease-in-out;
+  transform-origin: 310px 530px;
+}
+
+.crane-active .crane-body-group {
+  animation: craneBodyMove 2.2s ease-in-out;
+}
+
+@keyframes craneWingLeft {
+  0%, 100% { transform: rotate(0deg); }
+  30%, 70% { transform: rotate(-28deg) translateY(-8px); }
+  50% { transform: rotate(-35deg) translateY(-12px); }
+}
+
+@keyframes craneWingRight {
+  0%, 100% { transform: rotate(0deg); }
+  30%, 70% { transform: rotate(26deg) translateY(-6px); }
+  50% { transform: rotate(32deg) translateY(-10px); }
+}
+
+@keyframes craneStep {
+  0%, 100% { transform: rotate(0deg); }
+  35% { transform: rotate(-22deg) translateY(-10px); }
+  65% { transform: rotate(12deg) translateY(0); }
+}
+
+@keyframes craneBodyMove {
+  0%, 100% { transform: translate(0, 0); }
+  35% { transform: translate(6px, -4px); }
+  65% { transform: translate(14px, 0); }
+}
+
+/* 2. ბუ: დაახამხამოს თვალები და ოდნავ გააქნიოს ფრთები */
+.owl-active .owl-eye-lid {
+  animation: owlBlink 1.8s ease-in-out 2;
+  transform-origin: center;
+}
+
+.owl-active .owl-wing {
+  animation: owlWingFlap 1.8s ease-in-out;
+  transform-origin: 880px 240px;
+}
+
+.owl-active .owl-head {
+  animation: owlHeadBob 1.8s ease-in-out;
+  transform-origin: 895px 230px;
+}
+
+@keyframes owlBlink {
+  0%, 40%, 60%, 100% { transform: scaleY(0.08); opacity: 0; }
+  45%, 55% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes owlWingFlap {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-14deg) scale(1.05); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-12deg); }
+}
+
+@keyframes owlHeadBob {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-8deg) translateY(-2px); }
+  70% { transform: rotate(8deg) translateY(-2px); }
+}
+
+/* 3. კუ: ნელა გაიაროს რამდენიმე ნაბიჯი და თავი ოდნავ გამოყოს ბაკნიდან */
+.turtle-active .turtle-head {
+  animation: turtleHeadPeek 2.5s ease-in-out;
+  transform-origin: 470px 580px;
+}
+
+.turtle-active .turtle-legs {
+  animation: turtleWalkLegs 2.5s ease-in-out;
+}
+
+.turtle-active {
+  animation: turtleWalkStep 2.5s ease-in-out forwards;
+}
+
+@keyframes turtleHeadPeek {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  35% { transform: translate(-10px, -2px) scale(1.15); }
+  75% { transform: translate(-12px, -3px) scale(1.18); }
+}
+
+@keyframes turtleWalkLegs {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(10deg); }
+  50% { transform: rotate(-8deg); }
+  75% { transform: rotate(10deg); }
+}
+
+@keyframes turtleWalkStep {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-12px); }
+  100% { transform: translateX(-20px); }
+}
+
+/* 4. მუხა: ფოთლები ნაზად შეარხიოს */
+.oak-active .oak-canopy-layer-1 {
+  animation: oakRustle1 2.2s ease-in-out;
+  transform-origin: 860px 220px;
+}
+
+.oak-active .oak-canopy-layer-2 {
+  animation: oakRustle2 2.2s ease-in-out;
+  transform-origin: 820px 180px;
+}
+
+.oak-active .oak-leaves-detail {
+  animation: oakRustleLeaves 2.2s ease-in-out;
+}
+
+@keyframes oakRustle1 {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(1.2deg) scale(1.015); }
+  50% { transform: rotate(-1.4deg) scale(0.99); }
+  75% { transform: rotate(0.8deg) scale(1.01); }
+}
+
+@keyframes oakRustle2 {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-1.5deg) scale(1.02); }
+  70% { transform: rotate(1.3deg) scale(0.995); }
+}
+
+@keyframes oakRustleLeaves {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px) skewX(2deg); }
+  60% { transform: translateY(2px) skewX(-2deg); }
+}
+
+/* 5. რკო: მუხის ტოტიდან უსაფრთხოდ ჩამოვარდეს და ბალახზე გაჩერდეს */
+.acorn-active {
+  animation: acornFall 2.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transform-origin: center;
+}
+
+@keyframes acornFall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  15% {
+    transform: translate(-3px, 6px) rotate(8deg);
+  }
+  45% {
+    transform: translate(-10px, 160px) rotate(-15deg);
+  }
+  70% {
+    transform: translate(-14px, 290px) rotate(22deg);
+  }
+  85% {
+    transform: translate(-15px, 275px) rotate(12deg);
+  }
+  95% {
+    transform: translate(-16px, 292px) rotate(16deg);
+  }
+  100% {
+    transform: translate(-16px, 290px) rotate(15deg);
+  }
+}
+
+/* 6. ტოტი: ქარში მსუბუქად შეირხეს */
+.branch-active {
+  animation: branchSway 2.5s ease-in-out;
+  transform-origin: 940px 290px;
+}
+
+@keyframes branchSway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3.5deg); }
+  50% { transform: rotate(2.8deg); }
+  75% { transform: rotate(-1.5deg); }
+  90% { transform: rotate(0.8deg); }
+}
+
+/* 7. ია: კვირტიდან ნელა გაიშალოს იისფერი ყვავილი */
+.violet-active .violet-petals {
+  animation: violetBloom 2.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-origin: 650px 600px;
+}
+
+.violet-active .violet-center {
+  animation: violetCenterGlow 2.4s ease-in-out forwards;
+}
+
+@keyframes violetBloom {
+  0% {
+    transform: scale(0.4) rotate(-20deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15) rotate(5deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(0.96) rotate(-2deg);
+  }
+  100% {
+    transform: scale(1.08) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes violetCenterGlow {
+  0% { transform: scale(0.3); opacity: 0.4; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 8. სკა: სკის გარშემო ორი ან სამი პატარა ფუტკარი მშვიდად დაფრინავდეს */
+.bee-flight-1 {
+  animation: beeCircle1 5s ease-in-out infinite;
+  transform-origin: 750px 320px;
+}
+
+.bee-flight-2 {
+  animation: beeCircle2 6s ease-in-out infinite;
+  transform-origin: 750px 320px;
+}
+
+.bee-flight-3 {
+  animation: beeCircle3 4.5s ease-in-out infinite;
+  transform-origin: 750px 320px;
+}
+
+@keyframes beeCircle1 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(25px, -18px) rotate(15deg); }
+  50% { transform: translate(10px, -35px) rotate(-10deg); }
+  75% { transform: translate(-20px, -15px) rotate(20deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes beeCircle2 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  30% { transform: translate(-28px, 15px) rotate(-20deg); }
+  60% { transform: translate(18px, 25px) rotate(15deg); }
+  85% { transform: translate(22px, -8px) rotate(-10deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes beeCircle3 {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(16px, -24px); }
+  66% { transform: translate(-14px, 12px); }
+  100% { transform: translate(0, 0); }
+}
+
+.beehive-active .hive-body {
+  animation: hiveGentleBounce 1.8s ease-in-out;
+  transform-origin: 745px 280px;
+}
+
+@keyframes hiveGentleBounce {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  50% { transform: rotate(-2.5deg); }
+  75% { transform: rotate(1.5deg); }
+}
+
+/* --- ჰოვერისა და ფოკუსის რბილი გამოკვეთა (სახელის ჩვენების გარეშე) --- */
+.interactive-object {
+  cursor: pointer;
+  outline: none;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.interactive-object:hover,
+.interactive-object:focus-visible {
+  filter: drop-shadow(0 0 10px rgba(255, 235, 59, 0.85)) drop-shadow(0 0 18px rgba(76, 175, 80, 0.6));
+}
+
+.interactive-object:focus-visible {
+  stroke: #ff9800;
+  stroke-width: 2px;
+}
+
+/* ვარსკვლავის გამოჩენა სწორ პასუხზე */
+@keyframes starPop {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.25) rotate(15deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.anim-star-pop {
+  animation: starPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* ნაზი შერყევა შეცდომისას */
+@keyframes gentleNudge {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+}
+
+.anim-gentle-nudge {
+  animation: gentleNudge 0.5s ease-in-out;
+}
