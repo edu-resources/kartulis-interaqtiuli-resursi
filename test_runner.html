@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+window.testLogs = [];
+window.testErrors = [];
+window.onerror = function(msg, url, line, col, err) {
+  window.testErrors.push({ msg: msg, url: url, line: line, col: col, stack: err ? err.stack : null });
+};
+</script>
+<script src="js/data.js"></script>
+<script src="js/audio.js"></script>
+</head>
+<body>
+<div id="status">INIT</div>
+<script>
+try {
+  var s = 'DATA_OK: ' + OBJECT_SEQUENCE.length + ' objects; ' + Object.keys(ANIMALS_GALLERY).length + ' animals; AUDIO_OK: ' + (typeof AppAudio.playClick);
+  if (window.testErrors.length > 0) {
+    s += ' ERRORS: ' + JSON.stringify(window.testErrors);
+  }
+  document.getElementById('status').innerText = s;
+} catch(e) {
+  document.getElementById('status').innerText = 'EXCEPTION: ' + e.message;
+}
+</script>
+</body>
+</html>
